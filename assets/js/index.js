@@ -1,40 +1,56 @@
 'use strict';
 
-const TASK_PATTERN= /(?!^\s*?$)^.+$/;
+const tasks = [];
 
-const inputTaskElem = document.querySelector('input[name="task"]');
-
-inputTaskElem.oninput = onInputHandler;
+const taskInputElem = window.document.querySelector('input[name="task"]');
 
 const createTaskButtonElem = document.getElementById('createTaskButton');
 
-createTaskButtonElem.addEventListener('click', onCreateTaskButtonClick);
+const taskListElem = window.document.getElementById('tasksList');
 
 
+createTaskButtonElem.onclick = function (event) {
+    const {value} = taskInputElem;
+    if (value) {
 
-let isValid = false;
+        tasks.push(value);
+        const taskItem = createTaskListItemElem({
+            id: tasks.length - 1,
+            value: value
+        });
+        taskListElem.prepend(taskItem);
+        taskInputElem.value = "";
 
-function onCreateTaskButtonClick( event ) {
+    }
+};
 
-    const taskInputElem = document.querySelector("input[placeholder=\"Please input your task\"]")
-    alert(taskInputElem.value);
-    taskInputElem.value = "";
+
+function createTaskListItemElem(task) {
+    const taskListItemElem = window.document.createElement('li');
+    taskListItemElem.setAttribute("id", task.id);
+    taskListItemElem.appendChild(createTaskCheckBoxElem(task));
+
+    taskListItemElem.append(task.value);
+    return taskListItemElem;
 }
 
+function createTaskCheckBoxElem(task) {
+    const taskCheckBoxElem = window.document.createElement('input');
+    taskCheckBoxElem.setAttribute("type", "checkbox");
+    taskCheckBoxElem.setAttribute("data-taskid", task.id);
+    taskCheckBoxElem.onchange = onCheckBoxCheckedHandler;
+    return taskCheckBoxElem;
+}
 
-function onInputHandler(event) {
+function onCheckBoxCheckedHandler(event) {
 
-    isValid = TASK_PATTERN.test(this.value);
-    if(isValid){
+   // const taskListItemElem = document.getElementById(this.dataset.taskid);
+    document.getElementById(this.dataset.taskid).classList[this.checked ? "add" : "remove"]('doneTask')
 
-        this.classList.remove("invalidStyle");
-        this.classList.add("validStyle");
-
+    /*if(this.checked){
+        taskListItemElem.classList.add('doneTask');
     }else{
-        this.classList.add("invalidStyle");
-        this.classList.remove("validStyle");
-    }
+        taskListItemElem.classList.remove('doneTask');
+    }*/
 
-
-    console.log(isValid);
 }

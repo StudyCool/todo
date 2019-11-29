@@ -2,25 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>To do</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Kalam:400,700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-
-<div class="container">
-
+<div class="appArea">
     <div>
-        <input name="task" type="text" placeholder="Please input your task" required >
-        <div  id="createTaskButton">Add task</div>
+        <h1>to do</h1>
     </div>
-    <ul id="tasksList">
+
+    <!-- <nav >
+         <div class = "navContainer">
+             <div class="navButton">Add new task</div>
+             <div class = "taskState">
+                 <div class="navButton">Active</div>
+                 <div class="navButton">Finished</div>
+             </div>
+         </div>
+     </nav>
 
 
-    </ul>
+ -->
+    <div class="container">
+
+        <div>
+            <input name="task" id="task" type="text" placeholder="Please input your task" required>
+            <div id="createTaskButton">Add task</div>
+        </div>
+        <ul id="tasksList">
+
+
+        </ul>
+    </div>
+
+
+    <script src="./assets/js/index.js"></script>
 </div>
 
-
-<script src="./assets/js/index.js"></script>
 </body>
 </html>
